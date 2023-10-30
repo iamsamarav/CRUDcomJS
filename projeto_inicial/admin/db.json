@@ -1,19 +1,9 @@
 {
   "profile": [
     {
-      "nome": "felipe",
-      "email": "felipe@alura.com",
+      "nome": "Samara Vitória",
+      "email": "samaravtr323@gmail.com",
       "id": 1
-    },
-    {
-      "nome": "Samara",
-      "email": "samara@gmail.com",
-      "id": 2
-    },
-    {
-      "nome": "Lilyan",
-      "email": "lila@gmail.com",
-      "id": 3
     }
   ]
 }
