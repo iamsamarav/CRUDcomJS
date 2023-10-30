@@ -7,7 +7,7 @@ const criaNovaLinha = (nome, email, id) => {
             <td>${email}</td>
             <td>
                 <ul class="tabela__botoes-controle">
-                    <li><a href="../telas/edita_cliente.html" class="botao-simples botao-simples--editar">Editar</a></li>
+                    <li><a href="../telas/edita_cliente.html?id=${id}" class="botao-simples botao-simples--editar">Editar</a></li>
                     <li><button class="botao-simples botao-simples--excluir" type="button">Excluir</button></li>
                 </ul>
     </td>`
@@ -19,21 +19,29 @@ const criaNovaLinha = (nome, email, id) => {
 
 const tabela = document.querySelector('[data-tabela]')
 
-tabela.addEventListener('click',(e) =>{
+tabela.addEventListener('click', async (e) =>{
     e.preventDefault()
     let excluir = e.target.className == "botao-simples botao-simples--excluir"
+    let editar = e.target.className == "botao-simples botao-simples--editar"
+
     if (excluir) {
         const linhaCliente = e.target.closest('[data-id]')
         let id = linhaCliente.dataset.id
-        clienteService.removeCliente(id)
-        .then(() =>{
+        await clienteService.removeCliente(id)
             linhaCliente.remove()
-        })
+    }
+
+    if(editar){
+        const linhaCliente = e.target.closest('[data-id]')
+        let id = linhaCliente.dataset.id
+        window.location.href= `../telas/edita_cliente.html?id=${id}`  
     }
 })
 
-clienteService.listaClientes()
-.then( data => {
-    data.forEach(cliente => {
+const render = async () => {
+    const listaClientes = await clienteService.listaClientes()
+    listaClientes.forEach(cliente => {
         tabela.appendChild(criaNovaLinha(cliente.nome, cliente.email, cliente.id))})
-})
+}
+
+render()
