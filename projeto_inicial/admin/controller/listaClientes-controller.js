@@ -23,25 +23,36 @@ tabela.addEventListener('click', async (e) =>{
     e.preventDefault()
     let excluir = e.target.className == "botao-simples botao-simples--excluir"
     let editar = e.target.className == "botao-simples botao-simples--editar"
-
-    if (excluir) {
-        const linhaCliente = e.target.closest('[data-id]')
-        let id = linhaCliente.dataset.id
-        await clienteService.removeCliente(id)
-            linhaCliente.remove()
+    try{
+        if (excluir) {
+            const linhaCliente = e.target.closest('[data-id]')
+            let id = linhaCliente.dataset.id
+            await clienteService.removeCliente(id)
+                linhaCliente.remove()
+        }
+    
+        if(editar){
+            const linhaCliente = e.target.closest('[data-id]')
+            let id = linhaCliente.dataset.id
+            window.location.href= `../telas/edita_cliente.html?id=${id}`  
+        }
+    } catch(error){
+        console.log(error)
+        window.location.href = '../telas/erro.html'
     }
 
-    if(editar){
-        const linhaCliente = e.target.closest('[data-id]')
-        let id = linhaCliente.dataset.id
-        window.location.href= `../telas/edita_cliente.html?id=${id}`  
-    }
 })
 
 const render = async () => {
-    const listaClientes = await clienteService.listaClientes()
-    listaClientes.forEach(cliente => {
-        tabela.appendChild(criaNovaLinha(cliente.nome, cliente.email, cliente.id))})
+    try{
+        const listaClientes = await clienteService.listaClientes()
+        listaClientes.forEach(cliente => {
+            tabela.appendChild(criaNovaLinha(cliente.nome, cliente.email, cliente.id))})
+    } catch (error){
+        console.log(error)
+        window.location.href = '../telas/erro.html'
+    }
+
 }
 
 render()
