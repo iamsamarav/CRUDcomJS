@@ -29,6 +29,8 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_KEY }}
         script: |
+          cd ~/deploy/projeto_inicial/admin
+          npm install
           cd ~/deploy
           sudo docker-compose down
           sudo docker-compose up -d
