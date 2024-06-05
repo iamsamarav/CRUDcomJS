@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY ./projeto_inicial/admin/package*.json ./
 
 # Install dependencies
-RUN npm install --global browser-sync json-server
+RUN npm install --global browser-sync json-server concurrently
 
 # Copy the rest of the application code to the working directory
 COPY ./projeto_inicial/admin .
