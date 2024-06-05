@@ -1,5 +1,5 @@
 const listaClientes = () => {
-    return fetch(`http://localhost:3000/profile`)
+    return fetch(`http://localhost:3005/profile`)
     .then( resposta => {
         if(resposta.ok){
         return resposta.json()
@@ -9,7 +9,7 @@ const listaClientes = () => {
 }
 
 const criaCliente = (nome, email) => {
-    return fetch(`http://localhost:3000/profile`,{
+    return fetch(`http://localhost:3005/profile`,{
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -28,7 +28,7 @@ const criaCliente = (nome, email) => {
 }
 
 const removeCliente = (id) =>{
-    return fetch(`http://localhost:3000/profile/${id}`,{
+    return fetch(`http://localhost:3005/profile/${id}`,{
         method: 'DELETE'})
         .then(resposta =>{
             if(!resposta.ok){
@@ -38,7 +38,7 @@ const removeCliente = (id) =>{
 }
 
 const detalhaCliente = (id) => {
-    return fetch(`http://localhost:3000/profile/${id}`)
+    return fetch(`http://localhost:3005/profile/${id}`)
     .then(resposta => {
         if(resposta.ok){
             return resposta.json()
@@ -49,7 +49,7 @@ const detalhaCliente = (id) => {
 }
 
 const atualizaCliente = (id, nome, email) => {
-    return fetch(`http://localhost:3000/profile/${id}`,{
+    return fetch(`http://localhost:3005/profile/${id}`,{
         method: 'PUT',
         headers: {
             'Content-type': 'application/json'
