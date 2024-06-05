@@ -2,7 +2,8 @@ name: Deploy to EC2
 
 on:
   push:
-    branches: [master, staging]
+    branches: [main, stagging]
+      
 
 jobs:
   deploy:
